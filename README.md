@@ -1,5 +1,4 @@
-# Fast Injective Mesh Parameterization via Beltrami Coefficient
-Prolongation
+# Fast Injective Mesh Parameterization via Beltrami Coefficient Prolongation
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 This code includes the implementation of the Eurographics 2026 paper "Fast Injective Mesh Parameterization via Beltrami Coefficient
 Prolongation" authored by Guy Fargion and Ofir Weber. 
