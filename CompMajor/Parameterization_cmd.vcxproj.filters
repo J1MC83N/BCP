@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Natvis Include="src\eigen.natvis" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Energy.cpp" />
+    <ClCompile Include="src\EnergySymDir.cpp" />
+    <ClCompile Include="src\main_cmd.cpp" />
+    <ClCompile Include="src\Newton.cpp" />
+    <ClCompile Include="src\PardisoSolver.cpp" />
+    <ClCompile Include="src\Solver.cpp" />
+    <ClCompile Include="src\Utils\MatlabGMMDataExchange.cpp">
+      <Filter>Matlab</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utils\MatlabInterface.cpp">
+      <Filter>Matlab</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utils\Limit_Util.cpp">
+      <Filter>Matlab</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\EigenTypes.h" />
+    <ClInclude Include="src\Energy.h" />
+    <ClInclude Include="src\EnergySymDir.h" />
+    <ClInclude Include="src\Newton.h" />
+    <ClInclude Include="src\PardisoSolver.h" />
+    <ClInclude Include="src\Solver.h" />
+    <ClInclude Include="src\Utils\Limit_Util.h">
+      <Filter>Matlab</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utils\MatlabGMMDataExchange.h">
+      <Filter>Matlab</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utils\MatlabInterface.h">
+      <Filter>Matlab</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utils\GMM_Macros.h">
+      <Filter>Matlab</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Matlab">
+      <UniqueIdentifier>{874314f8-e54c-4671-a8c7-d293c7df1f5c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

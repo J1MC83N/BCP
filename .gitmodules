@@ -1,0 +1,9 @@
+[submodule "BCP/GIF/GIF/libigl"]
+	path = BCP/GIF/GIF/libigl
+	url = https://github.com/Roipo/libigl.git
+[submodule "GIF/GIF/libigl"]
+	path = GIF/GIF/libigl
+	url = https://github.com/Roipo/libigl.git
+[submodule "CompMajor/libigl"]
+	path = CompMajor/libigl
+	url = https://github.com/Roipo/libigl.git
