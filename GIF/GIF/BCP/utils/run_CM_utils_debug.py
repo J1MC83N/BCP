@@ -45,6 +45,7 @@ def run_CM(V, F, exe_path, cache_path):
     print("------- [CM run_CM] -------")
     print(f">    Command: {cmdline}")
     print(f">    Working directory: {exe_file_dir}")
+
     p = Popen(
         "cmd /c " + cmdline,
         cwd=exe_file_dir,
@@ -74,23 +75,25 @@ def run_CM(V, F, exe_path, cache_path):
         print(">    Command timed out. Terminating the process.")
         p.terminate()  # Terminate the process
         print("------- [CM run_CM end] -------")
-    # # If the external CM executable did not create the expected result files,
-    # # create a fallback .mat and meta file so downstream code can continue
-    # # (useful for development when the compiled exe isn't available).
-    # if not os.path.exists(tmp_result_mat_file) or not os.path.exists(tmp_meta_data_txt_file):
-    #     try:
-    #         # create a dummy uvs array (one UV per face)
-    #         uvs_dummy = np.zeros((F.shape[0], 2))
-    #         sio.savemat(tmp_result_mat_file, {"uvs": uvs_dummy})
-    #         with open(tmp_meta_data_txt_file, "w") as meta_f:
-    #             meta_f.write("time:0.0\n")
-    #             meta_f.write("iters:0\n")
-    #             meta_f.write("esd:inf\n")
-    #     except Exception:
-    #         # If fallback creation fails, let the subsequent loadmat raise the
-    #         # original error so the caller can see a traceback.
-    #         pass
 
+    # If the external CM executable did not create the expected result files,
+    # create a fallback .mat and meta file so downstream code can continue
+    # (useful for development when the compiled exe isn't available).
+    if not os.path.exists(tmp_result_mat_file) or not os.path.exists(tmp_meta_data_txt_file):
+        print(f"[CM fallback] Creating fallback files: {tmp_result_mat_file}, {tmp_meta_data_txt_file}")
+        try:
+            # create a dummy uvs array (one UV per face)
+            uvs_dummy = np.zeros((F.shape[0], 2))
+            sio.savemat(tmp_result_mat_file, {"uvs": uvs_dummy})
+            with open(tmp_meta_data_txt_file, "w") as meta_f:
+                meta_f.write("time:0.0\n")
+                meta_f.write("iters:0\n")
+                meta_f.write("esd:inf\n")
+        except Exception as e:
+            # If fallback creation fails, let the subsequent loadmat raise the
+            # original error so the caller can see a traceback.
+            print(f"[CM fallback] Failed to create fallback: {e}")
+            pass
 
     res_CM = sio.loadmat(tmp_result_mat_file)
     uvs = res_CM["uvs"]
@@ -129,7 +132,9 @@ def run_CM_with_target_energy(V, F, target_energy, exe_path, cache_path):
         + str(target_energy)
     )
 
-    print(cmdline)
+    print("------- [CM run_CM_with_target_energy] -------")
+    print(f">    Command: {cmdline}")
+    print(f">    Working directory: {exe_file_dir}")
 
     p = Popen(
         "cmd /c " + cmdline,
@@ -140,12 +145,26 @@ def run_CM_with_target_energy(V, F, target_energy, exe_path, cache_path):
     )
     try:
         stdout, stderr = p.communicate(timeout=TIMEOUT_SECONDS)
-        print("stdout:", stdout.decode())
-        print("stderr:", stderr.decode())
+        print("------- [CM run_CM_with_target_energy stdout] -------")
+        if stdout:
+            for line in stdout.decode('utf-8', errors='ignore').split('\n'):
+                if line.strip():
+                    print(f">    {line}")
+        else:
+            print(">    (no stdout)")
+        print("------- [CM run_CM_with_target_energy stderr] -------")
+        if stderr:
+            for line in stderr.decode('utf-8', errors='ignore').split('\n'):
+                if line.strip():
+                    print(f">    {line}")
+        else:
+            print(">    (no stderr)")
+        print("------- [CM run_CM_with_target_energy end] -------")
     except TimeoutExpired:
         # Handle timeout
-        print("Command timed out. Terminating the process.")
+        print(">    Command timed out. Terminating the process.")
         p.terminate()  # Terminate the process
+        print("------- [CM run_CM_with_target_energy end] -------")
 
     res_CM = sio.loadmat(tmp_result_mat_file)
     uvs_full = res_CM["uvs"]
@@ -182,6 +201,10 @@ def run_CM_with_target_runtime(V, F, target_time, exe_path, cache_path):
         + str(target_time)
     )
 
+    print("------- [CM run_CM_with_target_runtime] -------")
+    print(f">    Command: {cmdline}")
+    print(f">    Working directory: {exe_file_dir}")
+
     p = Popen(
         "cmd /c " + cmdline,
         cwd=exe_file_dir,
@@ -191,10 +214,26 @@ def run_CM_with_target_runtime(V, F, target_time, exe_path, cache_path):
     )
     try:
         stdout, stderr = p.communicate(timeout=TIMEOUT_SECONDS)
+        print("------- [CM run_CM_with_target_runtime stdout] -------")
+        if stdout:
+            for line in stdout.decode('utf-8', errors='ignore').split('\n'):
+                if line.strip():
+                    print(f">    {line}")
+        else:
+            print(">    (no stdout)")
+        print("------- [CM run_CM_with_target_runtime stderr] -------")
+        if stderr:
+            for line in stderr.decode('utf-8', errors='ignore').split('\n'):
+                if line.strip():
+                    print(f">    {line}")
+        else:
+            print(">    (no stderr)")
+        print("------- [CM run_CM_with_target_runtime end] -------")
     except TimeoutExpired:
         # Handle timeout
-        print("Command timed out. Terminating the process.")
+        print(">    Command timed out. Terminating the process.")
         p.terminate()  # Terminate the process
+        print("------- [CM run_CM_with_target_runtime end] -------")
 
     res_CM = sio.loadmat(tmp_result_mat_file)
     uvs_full = res_CM["uvs"]
@@ -232,6 +271,10 @@ def run_CM_with_customized_init(V, F, init_UVs, exe_path, cache_path):
         + '"'
     )
 
+    print("------- [CM run_CM_with_customized_init] -------")
+    print(f">    Command: {cmdline}")
+    print(f">    Working directory: {exe_file_dir}")
+
     p = Popen(
         "cmd /c " + cmdline,
         cwd=exe_file_dir,
@@ -241,10 +284,26 @@ def run_CM_with_customized_init(V, F, init_UVs, exe_path, cache_path):
     )
     try:
         stdout, stderr = p.communicate(timeout=TIMEOUT_SECONDS)
+        print("------- [CM run_CM_with_customized_init stdout] -------")
+        if stdout:
+            for line in stdout.decode('utf-8', errors='ignore').split('\n'):
+                if line.strip():
+                    print(f">    {line}")
+        else:
+            print(">    (no stdout)")
+        print("------- [CM run_CM_with_customized_init stderr] -------")
+        if stderr:
+            for line in stderr.decode('utf-8', errors='ignore').split('\n'):
+                if line.strip():
+                    print(f">    {line}")
+        else:
+            print(">    (no stderr)")
+        print("------- [CM run_CM_with_customized_init end] -------")
     except TimeoutExpired:
         # Handle timeout
-        print("Command timed out. Terminating the process.")
+        print(">    Command timed out. Terminating the process.")
         p.terminate()  # Terminate the process
+        print("------- [CM run_CM_with_customized_init end] -------")
 
     res_CM = sio.loadmat(tmp_result_mat_file)
     uvs = res_CM["uvs"]
