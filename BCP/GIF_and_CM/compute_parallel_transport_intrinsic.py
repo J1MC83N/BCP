@@ -1,7 +1,7 @@
 import os
 import time
 from datetime import datetime
-from subprocess import PIPE, Popen
+from subprocess import PIPE, Popen, TimeoutExpired
 
 import igl
 import numpy as np
@@ -213,8 +213,31 @@ def compute_middle_angle(f, one_rings, integrated_angles, all_one_ring_angles):
 
     EXE_FILE_DIR, EXE_FILE_NAME = ROOT_PATH_PARALLEL_TRANSPORT_EXE.rsplit("/", 1)
     cmdline = f"{EXE_FILE_NAME} {tmp_source_matrices_file} {tmp_res_file} 1"
+    print("------- [PT compute_middle_angle] -------")
+    print(f">    Command: {cmdline}")
+    print(f">    Working directory: {EXE_FILE_DIR}")
     p = Popen("cmd /c " + cmdline, cwd=EXE_FILE_DIR, shell=True, stdout=PIPE, stderr=PIPE)
-    p.wait()
+    try:
+        stdout, stderr = p.communicate(timeout=3600)
+        print("------- [PT compute_middle_angle stdout] -------")
+        if stdout:
+            for line in stdout.decode('utf-8', errors='ignore').split('\n'):
+                if line.strip():
+                    print(f">    {line}")
+        else:
+            print(">    (no stdout)")
+        print("------- [PT compute_middle_angle stderr] -------")
+        if stderr:
+            for line in stderr.decode('utf-8', errors='ignore').split('\n'):
+                if line.strip():
+                    print(f">    {line}")
+        else:
+            print(">    (no stderr)")
+        print("------- [PT compute_middle_angle end] -------")
+    except TimeoutExpired:
+        print(">    Command timed out. Terminating the process.")
+        p.terminate()
+        print("------- [PT compute_middle_angle end] -------")
     res_angles = loadmat(tmp_res_file)
     os.remove(tmp_source_matrices_file)
     os.remove(tmp_res_file)

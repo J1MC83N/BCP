@@ -40,6 +40,9 @@ def run_GIF(
     exe_file_dir, exe_file_name = exe_path.rsplit("/", 1)
     if allow_IDT_fix:
         cmdline = f"{exe_file_name} {tmp_obj_file} {final_GIF_res_path} True False False {interior_faces} {boundary_segment_size} {curvature_meta_vertices_rate} {outer_termination_condition_rate} {energy_related_termination_condition} {edge_lengths_mat_file}"
+        print("------- [GIF run_GIF IDT] -------")
+        print(f">    Command: {cmdline}")
+        print(f">    Working directory: {exe_file_dir}")
         p = Popen(
             "cmd /c " + cmdline,
             cwd=exe_file_dir,
@@ -49,22 +52,55 @@ def run_GIF(
         )
         try:
             stdout, stderr = p.communicate(timeout=TIMEOUT_SECONDS)
+            print("------- [GIF run_GIF IDT stdout] -------")
+            if stdout:
+                for line in stdout.decode('utf-8', errors='ignore').split('\n'):
+                    if line.strip():
+                        print(f">    {line}")
+            else:
+                print(">    (no stdout)")
+            print("------- [GIF run_GIF IDT stderr] -------")
+            if stderr:
+                for line in stderr.decode('utf-8', errors='ignore').split('\n'):
+                    if line.strip():
+                        print(f">    {line}")
+            else:
+                print(">    (no stderr)")
+            print("------- [GIF run_GIF IDT end] -------")
         except TimeoutExpired:
-            # Handle timeout
-            print("Command timed out. Terminating the process.")
-            p.terminate()  # Terminate the process
+            print(">    Command timed out. Terminating the process.")
+            p.terminate()
+            print("------- [GIF run_GIF IDT end] -------")
         res_GIF = sio.loadmat(final_GIF_res_path)
         time_consumption = res_GIF["parametersMatrix"][4, 0]
     else:
         # run GIF with regular MVC fix
         cmdline = f"{exe_file_name} {tmp_obj_file} {final_GIF_res_path} False True True {interior_faces} {boundary_segment_size} {curvature_meta_vertices_rate} {outer_termination_condition_rate} {energy_related_termination_condition} {edge_lengths_mat_file}"
+        print("------- [GIF run_GIF MVC] -------")
+        print(f">    Command: {cmdline}")
+        print(f">    Working directory: {exe_file_dir}")
         p = Popen("cmd /c " + cmdline, cwd=exe_file_dir, shell=True, stdout=PIPE, stderr=PIPE)
         try:
             stdout, stderr = p.communicate(timeout=TIMEOUT_SECONDS)
+            print("------- [GIF run_GIF MVC stdout] -------")
+            if stdout:
+                for line in stdout.decode('utf-8', errors='ignore').split('\n'):
+                    if line.strip():
+                        print(f">    {line}")
+            else:
+                print(">    (no stdout)")
+            print("------- [GIF run_GIF MVC stderr] -------")
+            if stderr:
+                for line in stderr.decode('utf-8', errors='ignore').split('\n'):
+                    if line.strip():
+                        print(f">    {line}")
+            else:
+                print(">    (no stderr)")
+            print("------- [GIF run_GIF MVC end] -------")
         except TimeoutExpired:
-            # Handle timeout
-            print("Command timed out. Terminating the process.")
-            p.terminate()  # Terminate the process
+            print(">    Command timed out. Terminating the process.")
+            p.terminate()
+            print("------- [GIF run_GIF MVC end] -------")
         res_GIF = sio.loadmat(final_GIF_res_path)
         time_consumption = res_GIF["parametersMatrix"][4, 0]
     uvs = res_GIF["uvs_ordered"]

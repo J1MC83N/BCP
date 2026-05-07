@@ -12,7 +12,7 @@ from save_stats import compute_stats_to_summary
 
 # Input and output files
 DATA_FILE = "C:/Users/gmu_a/dev/BCP/meshes/data.json"
-OBJ_RESULTS_PATH = "C:/Users/gmu_a/dev/BCP/meshes"
+OBJ_RESULTS_PATH = "C:/Users/gmu_a/dev/BCP/meshes/"
 RESULTS_SUMMARY_PATH = "C:/Users/gmu_a/dev/BCP/meshes/res.csv"
 
 
