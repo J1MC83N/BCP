@@ -42,6 +42,7 @@ def run_CM(V, F, exe_path, cache_path):
         exe_file_name + ' "' + tmp_input_obj_file + '" "" "' + tmp_result_mat_file + '" "' + tmp_meta_data_txt_file + '"'
     )
 
+    print(cmdline)
     p = Popen(
         "cmd /c " + cmdline,
         cwd=exe_file_dir,
@@ -51,10 +52,29 @@ def run_CM(V, F, exe_path, cache_path):
     )
     try:
         stdout, stderr = p.communicate(timeout=TIMEOUT_SECONDS)
+        print("stdout:", stdout.decode())
+        print("stderr:", stderr.decode())
     except TimeoutExpired:
         # Handle timeout
         print("Command timed out. Terminating the process.")
         p.terminate()  # Terminate the process
+    # # If the external CM executable did not create the expected result files,
+    # # create a fallback .mat and meta file so downstream code can continue
+    # # (useful for development when the compiled exe isn't available).
+    # if not os.path.exists(tmp_result_mat_file) or not os.path.exists(tmp_meta_data_txt_file):
+    #     try:
+    #         # create a dummy uvs array (one UV per face)
+    #         uvs_dummy = np.zeros((F.shape[0], 2))
+    #         sio.savemat(tmp_result_mat_file, {"uvs": uvs_dummy})
+    #         with open(tmp_meta_data_txt_file, "w") as meta_f:
+    #             meta_f.write("time:0.0\n")
+    #             meta_f.write("iters:0\n")
+    #             meta_f.write("esd:inf\n")
+    #     except Exception:
+    #         # If fallback creation fails, let the subsequent loadmat raise the
+    #         # original error so the caller can see a traceback.
+    #         pass
+
 
     res_CM = sio.loadmat(tmp_result_mat_file)
     uvs = res_CM["uvs"]
@@ -93,6 +113,8 @@ def run_CM_with_target_energy(V, F, target_energy, exe_path, cache_path):
         + str(target_energy)
     )
 
+    print(cmdline)
+
     p = Popen(
         "cmd /c " + cmdline,
         cwd=exe_file_dir,
@@ -102,6 +124,8 @@ def run_CM_with_target_energy(V, F, target_energy, exe_path, cache_path):
     )
     try:
         stdout, stderr = p.communicate(timeout=TIMEOUT_SECONDS)
+        print("stdout:", stdout.decode())
+        print("stderr:", stderr.decode())
     except TimeoutExpired:
         # Handle timeout
         print("Command timed out. Terminating the process.")

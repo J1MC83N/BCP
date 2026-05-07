@@ -148,8 +148,8 @@ def compute_parallel_transport_intrinsic_vertex_to_face(
         try:
             angles_vertices_to_faces, middle_angle_time = compute_middle_angle(f, one_rings, integrated_angles, all_one_ring_angles)
             break
-        except Exception as e:
-            print(f"Failed attempt number {i}; error: {e}")
+        except:
+            print(f"Failed attempt number {i}")
             i += 1
             continue
 

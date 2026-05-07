@@ -59,7 +59,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(BOOST_64_DIR)\lib;$(CGAL_64_DIR)\lib;$(CGAL_64_DIR)\auxiliary\gmp\lib;$(MATLAB_64_DIR)\extern\lib\win64\microsoft;$(PARDISO_BIN);$(MATLAB_64_DIR);$(PARDISO_LIC_PATH);$(OMP_NUM_THREADS);$(MATLAB_64_DIR)\extern\include;$(NLOPT_DIR)\build\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libmx.lib;libeng.lib;libmat.lib;cgal_libgmp-10.lib;cgal_libmpfr-4.lib;libpardiso.lib;nlopt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libmx.lib;libeng.lib;libmat.lib;gmp.lib;mpfr.lib;libpardiso.lib;nlopt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -80,7 +80,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(BOOST_64_DIR)\lib;$(CGAL_64_DIR)\lib;$(CGAL_64_DIR)\auxiliary\gmp\lib;$(MATLAB_64_DIR)\extern\lib\win64\microsoft;$(PARDISO_BIN);$(NLOPT_DIR)\build\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libmx.lib;libeng.lib;libmat.lib;cgal_libgmp-10.lib;cgal_libmpfr-4.lib;libpardiso.lib;nlopt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libmx.lib;libeng.lib;libmat.lib;gmp.lib;mpfr.lib;libpardiso.lib;nlopt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration />
     </Link>
   </ItemDefinitionGroup>

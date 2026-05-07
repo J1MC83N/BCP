@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LocalDebuggerCommandArguments>
-    </LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>"C:\Users\gmu_a\dev\BCP\meshes\bimba1.obj" "C:\Users\gmu_a\dev\BCP\meshes\bimba1_uv.obj"</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommandArgumentsHistory>"C:\Users\gmu_a\dev\BCP\meshes\bimba1.obj" "C:\Users\gmu_a\dev\BCP\meshes\bimba1_uv.obj"|</LocalDebuggerCommandArgumentsHistory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LocalDebuggerCommandArguments>
-    </LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>"C:\Users\gmu_a\dev\BCP\meshes\bimba1.obj" "C:\Users\gmu_a\dev\BCP\meshes\bimba1_uv.obj"</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommandArgumentsHistory>"C:\Users\gmu_a\dev\BCP\meshes\bimba1.obj" "C:\Users\gmu_a\dev\BCP\meshes\bimba1_uv.obj"|</LocalDebuggerCommandArgumentsHistory>
   </PropertyGroup>
 </Project>

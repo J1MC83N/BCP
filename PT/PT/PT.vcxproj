@@ -58,7 +58,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(BOOST_64_DIR)\lib;$(CGAL_64_DIR)\lib;$(CGAL_64_DIR)\auxiliary\gmp\lib;$(MATLAB_64_DIR)\extern\lib\win64\microsoft;$(PARDISO_BIN);$(MATLAB_64_DIR);$(PARDISO_LIC_PATH);$(OMP_NUM_THREADS);$(MATLAB_64_DIR)\extern\include;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libmx.lib;libeng.lib;libmat.lib;libgmp-10.lib;libmpfr-4.lib;libpardiso.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libmx.lib;libeng.lib;libmat.lib;gmp.lib;mpfr.lib;libpardiso.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

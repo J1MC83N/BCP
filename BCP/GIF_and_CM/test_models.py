@@ -2,14 +2,18 @@ import json
 import igl
 import pandas as pd
 
+import sys
+sys.path.append("C:/Users/gmu_a/dev/BCP/BCP")
+sys.path.append("C:/Users/gmu_a/dev/BCP/BCP/utils")
+
 from GIF_and_CM.consts import ROOT_DIR_CACHE_GIF, ROOT_PATH_CM_EXE, ROOT_DIR_CACHE_CM, ROOT_PATH_GIF_EXE
 from run_GIF_CM import run_GIF_and_CM_with_simplification, run_GIF_and_CM_with_simplification_with_IDT
 from save_stats import compute_stats_to_summary
 
 # Input and output files
-DATA_FILE = "C:/Data/Projects/DLGP/Datasets/GIF_CM/BCP_all_models/Models_dataset/data.json"
-OBJ_RESULTS_PATH = "C:/Data/Projects/GIF and CM/Results/"
-RESULTS_SUMMARY_PATH = "C:/Data/Projects/GIF and CM/res1.csv"
+DATA_FILE = "C:/Users/gmu_a/dev/BCP/meshes/data.json"
+OBJ_RESULTS_PATH = "C:/Users/gmu_a/dev/BCP/meshes"
+RESULTS_SUMMARY_PATH = "C:/Users/gmu_a/dev/BCP/meshes/res.csv"
 
 
 OBJ_FOLDER = DATA_FILE.rsplit("/", 1)[0]

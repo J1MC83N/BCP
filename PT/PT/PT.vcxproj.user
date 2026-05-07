@@ -3,6 +3,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LocalDebuggerCommandArguments>C:/Data/DL_experiments_data/DLGP/cache_gradients/20250719184013_source_matrices.mat C:/Data/DL_experiments_data/DLGP/cache_gradients/20250719184013_res.mat 1</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommandArgumentsHistory>C:/Data/DL_experiments_data/DLGP/cache_gradients/20250719184013_source_matrices.mat C:/Data/DL_experiments_data/DLGP/cache_gradients/20250719184013_res.mat 1|</LocalDebuggerCommandArgumentsHistory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LocalDebuggerCommandArguments>C:/Data/DL_experiments_data/DLGP/cache_gradients/20250719235550_source_matrices.mat C:/Data/DL_experiments_data/DLGP/cache_gradients/20250719235550_res.mat 0</LocalDebuggerCommandArguments>

@@ -1,14 +1,28 @@
+# Use pathlib to determine repository root and compose paths dynamically.
+import os
+from pathlib import Path, PurePosixPath
+
+
+
+
+REPO_ROOT = PurePosixPath(Path(__file__).resolve().parents[2])
+print(f"Determined repository root: {REPO_ROOT}")
+
 # CM
-ROOT_PATH_CM_EXE = "C:/Data/Repositories/BCP/CompMajor/Parameterization_cmd.exe"
-ROOT_DIR_CACHE_CM = "C:/Data/DL_experiments_data/DLGP/cache_CM"
+ROOT_PATH_CM_EXE = str(REPO_ROOT / "CompMajor" / "Parameterization_cmd.exe")
+ROOT_DIR_CACHE_CM = str(REPO_ROOT / "caches" / "cache_CM")
+
 # GIF
-ROOT_PATH_GIF_EXE = "C:/Data/Repositories/BCP/GIF/GIF/x64/Release/GIF.exe"
-ROOT_DIR_CACHE_GIF = "C:/Data/DL_experiments_data/DLGP/cache_GIF"
-#Meshlib
-ROOT_DIR_CACHE_MESHLIB = "C:/Data/DL_experiments_data/DLGP/cache_meshlib"
+ROOT_PATH_GIF_EXE = str(REPO_ROOT / "GIF" / "GIF" / "x64" / "Release" / "GIF.exe")
+ROOT_DIR_CACHE_GIF = str(REPO_ROOT / "caches" / "cache_GIF")
+
+# Meshlib
+ROOT_DIR_CACHE_MESHLIB = str(REPO_ROOT / "caches" / "cache_meshlib")
+
 # Parallel transport
-ROOT_PATH_PARALLEL_TRANSPORT_EXE = "C:/Data/Repositories/BCP/PT/x64/Release/PT.exe"
-ROOT_DIR_CACHE_PARALLEL_TRANSPORT = "C:/Data/DL_experiments_data/DLGP/cache_gradients"
+ROOT_PATH_PARALLEL_TRANSPORT_EXE = str(REPO_ROOT / "PT" / "x64" / "Release" / "PT.exe")
+ROOT_DIR_CACHE_PARALLEL_TRANSPORT = str(REPO_ROOT / "caches" / "cache_gradients")
+
 
 
 INTERIOR_FACES_IN_GIF = -1
