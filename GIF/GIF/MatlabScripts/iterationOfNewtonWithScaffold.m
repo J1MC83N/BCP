@@ -10,11 +10,13 @@ if iter ~= 0
     numConvIters=5;
 end
 
-use_GPU = true;
+use_GPU = false;
 
-if size(GIF.F1, 1) > 2e5
-    use_GPU = true;
-end
+fprintf('[DEBUG] GIF mesh: %d faces, %d DOF\n', size(GIF.F1, 1), numDOF1);
+
+% if size(GIF.F1, 1) > 2e5
+%     use_GPU = true;
+% end
 
 n=(length(x_initial)+length(GIF.FixedIndices))/2;
 SPDHessian=true;
@@ -41,6 +43,7 @@ timesRemeshed = timesRemeshed + 1;
 EitersCounter=0;
 if use_GPU
     % move arrays to gpu
+    fprintf('[DEBUG] Moving arrays to GPU\n');
     J_fz_gpu=gpuArray(GIF.TJ_fz);
     J_fbz_gpu=gpuArray(GIF.TJ_fbz);
     Area_gpu=gpuArray(GIF.TArea);

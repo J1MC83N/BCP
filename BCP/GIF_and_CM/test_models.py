@@ -12,8 +12,8 @@ from run_GIF_CM import run_GIF_and_CM_with_simplification, run_GIF_and_CM_with_s
 from save_stats import compute_stats_to_summary
 
 # Input and output files
-DATA_FILE = "C:/Users/gmu_a/dev/BCP/meshes/data.json"
-OBJ_RESULTS_PATH = "C:/Users/gmu_a/dev/BCP/output/"
+DATA_FILE = "C:/Users/gmu_a/dev/BCP/meshes/morer/data.json"
+OBJ_RESULTS_PATH = "C:/Users/gmu_a/dev/BCP/output/morer/"
 RESULTS_SUMMARY_PATH = OBJ_RESULTS_PATH + "res.csv"
 
 

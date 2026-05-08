@@ -27,3 +27,4 @@ PT/.vs
 /.venv
 /.vs
 meshes/*
+output/*

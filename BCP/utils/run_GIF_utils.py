@@ -8,7 +8,7 @@ import torch
 import scipy.io as sio
 from subprocess import Popen, PIPE, TimeoutExpired
 
-TIMEOUT_SECONDS = 300
+TIMEOUT_SECONDS = 3600
 
 def save_data_for_GIF(vertices, faces, cache_path, edge_lengths=None):
     cur_time = datetime.now().strftime("%Y%m%d%H%M%S")
