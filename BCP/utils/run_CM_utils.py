@@ -14,6 +14,7 @@ def save_data_for_CM(vertices, faces, cache_path, init_UVs=None):
     cur_time = datetime.now().strftime("%Y%m%d%H%M%S")
     tmp_input_obj_file = cache_path + "/" + cur_time + ".obj"
     igl.write_obj(tmp_input_obj_file, vertices, faces)
+    tmp_uv_obj_file = cache_path + "/" + cur_time + "_CM_uv.obj"
     tmp_result_mat_file = cache_path + "/" + cur_time + "_CM_res.mat"
     tmp_meta_data_txt_file = cache_path + "/" + cur_time + "_CM_res_meta_data.txt"
     tmp_init_obj_file = None
@@ -22,6 +23,7 @@ def save_data_for_CM(vertices, faces, cache_path, init_UVs=None):
         igl.write_obj(tmp_init_obj_file, np.hstack([init_UVs, np.zeros((init_UVs.shape[0], 1))]), faces)
     return (
         tmp_input_obj_file,
+        tmp_uv_obj_file,
         tmp_result_mat_file,
         tmp_meta_data_txt_file,
         tmp_init_obj_file,
@@ -31,6 +33,7 @@ def save_data_for_CM(vertices, faces, cache_path, init_UVs=None):
 def run_CM(V, F, exe_path, cache_path):
     (
         tmp_input_obj_file,
+        tmp_uv_obj_file,
         tmp_result_mat_file,
         tmp_meta_data_txt_file,
         _,
@@ -39,7 +42,7 @@ def run_CM(V, F, exe_path, cache_path):
     exe_file_dir, exe_file_name = exe_path.rsplit("/", 1)
 
     cmdline = (
-        exe_file_name + ' "' + tmp_input_obj_file + '" "" "' + tmp_result_mat_file + '" "' + tmp_meta_data_txt_file + '"'
+        exe_file_name + ' "' + tmp_input_obj_file + '" "' + tmp_uv_obj_file + '" "' + tmp_result_mat_file + '" "' + tmp_meta_data_txt_file + '"'
     )
 
     print("------- [CM run_CM] -------")
@@ -101,15 +104,17 @@ def run_CM(V, F, exe_path, cache_path):
         e_sd = float(meta_data[2].removesuffix("\n").split(":")[1])
     except:
         e_sd = np.inf
-    os.remove(tmp_input_obj_file)
-    os.remove(tmp_result_mat_file)
-    os.remove(tmp_meta_data_txt_file)
+    # Files intentionally kept for debug inspection (timestamp-named in cache_CM/)
+    # os.remove(tmp_input_obj_file)
+    # os.remove(tmp_result_mat_file)
+    # os.remove(tmp_meta_data_txt_file)
     return uvs, CM_time_consumption, CM_iters_count, e_sd
 
 
 def run_CM_with_target_energy(V, F, target_energy, exe_path, cache_path):
     (
         tmp_input_obj_file,
+        tmp_uv_obj_file,
         tmp_result_mat_file,
         tmp_meta_data_txt_file,
         _,
@@ -121,7 +126,9 @@ def run_CM_with_target_energy(V, F, target_energy, exe_path, cache_path):
         exe_file_name
         + ' "'
         + tmp_input_obj_file
-        + '" "" "'
+        + '" "'
+        + tmp_uv_obj_file
+        + '" "'
         + tmp_result_mat_file
         + '" "'
         + tmp_meta_data_txt_file
@@ -163,6 +170,7 @@ def run_CM_with_target_energy(V, F, target_energy, exe_path, cache_path):
 def run_CM_with_target_runtime(V, F, target_time, exe_path, cache_path):
     (
         tmp_input_obj_file,
+        tmp_uv_obj_file,
         tmp_result_mat_file,
         tmp_meta_data_txt_file,
         _,
@@ -174,7 +182,9 @@ def run_CM_with_target_runtime(V, F, target_time, exe_path, cache_path):
         exe_file_name
         + ' "'
         + tmp_input_obj_file
-        + '" "" "'
+        + '" "'
+        + tmp_uv_obj_file
+        + '" "'
         + tmp_result_mat_file
         + '" "'
         + tmp_meta_data_txt_file
@@ -212,6 +222,7 @@ def run_CM_with_target_runtime(V, F, target_time, exe_path, cache_path):
 def run_CM_with_customized_init(V, F, init_UVs, exe_path, cache_path):
     (
         tmp_input_obj_file,
+        tmp_uv_obj_file,
         tmp_result_mat_file,
         tmp_meta_data_txt_file,
         tmp_init_obj_file,
@@ -223,7 +234,9 @@ def run_CM_with_customized_init(V, F, init_UVs, exe_path, cache_path):
         exe_file_name
         + ' "'
         + tmp_input_obj_file
-        + '" "" "'
+        + '" "'
+        + tmp_uv_obj_file
+        + '" "'
         + tmp_result_mat_file
         + '" "'
         + tmp_meta_data_txt_file

@@ -1,4 +1,5 @@
 import json
+import os
 import igl
 import pandas as pd
 
@@ -12,9 +13,11 @@ from save_stats import compute_stats_to_summary
 
 # Input and output files
 DATA_FILE = "C:/Users/gmu_a/dev/BCP/meshes/data.json"
-OBJ_RESULTS_PATH = "C:/Users/gmu_a/dev/BCP/meshes/"
-RESULTS_SUMMARY_PATH = "C:/Users/gmu_a/dev/BCP/meshes/res.csv"
+OBJ_RESULTS_PATH = "C:/Users/gmu_a/dev/BCP/output/"
+RESULTS_SUMMARY_PATH = OBJ_RESULTS_PATH + "res.csv"
 
+
+os.makedirs(OBJ_RESULTS_PATH, exist_ok=True)
 
 OBJ_FOLDER = DATA_FILE.rsplit("/", 1)[0]
 with open(DATA_FILE, 'r') as file:
