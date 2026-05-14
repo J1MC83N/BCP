@@ -10,13 +10,13 @@ if iter ~= 0
     numConvIters=5;
 end
 
-use_GPU = false;
+use_GPU = true;
 
 fprintf('[DEBUG] GIF mesh: %d faces, %d DOF\n', size(GIF.F1, 1), numDOF1);
 
-% if size(GIF.F1, 1) > 2e5
-%     use_GPU = true;
-% end
+if size(GIF.F1, 1) > 2e5
+    use_GPU = true;
+end
 
 n=(length(x_initial)+length(GIF.FixedIndices))/2;
 SPDHessian=true;
